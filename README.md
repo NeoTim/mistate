@@ -5,7 +5,7 @@
 
 > The minimal React state management library in the world
 
-less 1kb after gzip, 30 lines code only,
+Less than 1kb after gzip, 30 lines code only, one Api only.
 
 ## Installation
 
@@ -36,6 +36,8 @@ render(<App />, document.getElementById('root'))
 Check on CodeSandbox: [Counter](https://codesandbox.io/s/n0q613r56l)
 
 ## API
+
+Only one Api:
 
 > const { [get](#get), [set](#set), [getState](#getstate) } = create(init)
 
