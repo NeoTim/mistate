@@ -17,19 +17,27 @@
     "format:check": "prettier --list-different \"src/**/*.{js,ts,tsx}\"",
     "lint": "tslint -c tslint.json \"src/**/*.{ts,tsx}\"",
     "lint:fix": "tslint -c tslint.json \"src/**/*.{ts,tsx}\" --fix",
+    "test": "jest",
     "test:watch": "jest --watch",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "precommit": "lint-staged",
     "commitmsg": "commitlint -E GIT_PARAMS",
     "release": "standard-version"
   },
+
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/examples/",
+      "/.history/"
+    ]
   },
   "lint-staged": {
-    "{src,tests}/*.{js,ts,tsx}": [
+    "{src,__tests__}/*.{js,ts,tsx}": [
       "npm run format",
       "npm run lint:fix",
+      "npm test",
       "git add"
     ]
   },
