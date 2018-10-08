@@ -4,7 +4,7 @@ const { get, set, getState } = create({ count: 1, name: 'Counter' })
 
 const actions = {
   increment() {
-    set(s => ({ count: s.count + 1 }))
+    set({ count: 100 })
   },
   decrement() {
     set(s => ({ count: s.count - 1 }))

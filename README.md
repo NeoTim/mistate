@@ -5,7 +5,7 @@
 
 > The minimal React state management library in the world
 
-Less than 1kb after gzip, 30 lines code only, one Api only.
+Less than 1kb after gzip, 40 lines code only, one Api only.
 
 ## Installation
 
@@ -20,20 +20,25 @@ import React from 'react'
 import { render } from 'react-dom'
 import { create } from 'mistate'
 
-const { get, set } = create({ count: 1 })
+const { get, set } = create({ text: 'foo' })
 
 const App = () => (
   <div>
-    <span>{get(s => s.count)}</span>
-    <button onClick={() => set(s => ({ count: s.count - 1 }))}>-</button>
-    <button onClick={() => set(s => ({ count: s.count + 1 }))}>+</button>
+    <span>{get(s => s.text)}</span>
+    <button onClick={() => set({ text: 'bar' })}>set</button>
+    <button onClick={() => set({ text: 'foo' })}>reset</button>
   </div>
 )
 
 render(<App />, document.getElementById('root'))
 ```
 
-Check on CodeSandbox: [Counter](https://codesandbox.io/s/n0q613r56l)
+Check on CodeSandbox: [example](https://codesandbox.io/s/n0q613r56l)
+
+### Examples
+
+- [Basic](https://github.com/forsigner/mistate/tree/master/examples/basic)
+- [Counter](https://github.com/forsigner/mistate/tree/master/examples/counter)
 
 ## API
 
@@ -48,23 +53,23 @@ Get state in Component, Component will re-render if state is setted;
 First, you need create a store, example:
 
 ```js
-const { get, set } = create({ count: 1 })
+const { get, set } = create({ text: 'foo' })
 ```
 
 **Simple usage**
 
 ```js
-<span>{set(s => s.count)}</span>
+<span>{get(s => s.text)}</span>
 ```
 
 **Using selectors**
 
 ```js
 <div>
-  {set(
-    s => s.count,
-    count => (
-      <span>{count}</span>
+  {get(
+    s => s.text,
+    text => (
+      <span>{text}</span>
     ),
   )}
 </div>
@@ -75,9 +80,7 @@ const { get, set } = create({ count: 1 })
 Update state use `set()` in it, you can call it in anywhere, in React lifecycle fn、stateless componet... even out of React component, so you don't need HOC.
 
 ```js
-function increment() {
-  set(s => ({ count: s.count + 1 }))
-}
+set({ text: 'bar' })
 ```
 
 ### `getState()`
@@ -85,10 +88,9 @@ function increment() {
 Get the current state object.
 
 ```js
-const { getState } = create({ count: 1 })
+const { getState } = create({ text: 'foo' })
 const currentState = getState()
 ```
-
 
 ## License
 

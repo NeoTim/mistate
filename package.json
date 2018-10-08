@@ -24,7 +24,6 @@
     "commitmsg": "commitlint -E GIT_PARAMS",
     "release": "standard-version"
   },
-
   "jest": {
     "preset": "ts-jest",
     "testPathIgnorePatterns": [

@@ -3,12 +3,12 @@ import equal from 'fast-deep-equal'
 import { Props, Set, Updater, RenderFn } from './typings'
 export { create, Props }
 
-function create<S>(initialState: S) {
-  let state: S = initialState
-  const updaters: Updater[] = []
+function create<S>(init: S) {
+  let state: S = init
+  const updaters: Array<Updater<S>> = []
   const Box = class extends React.Component<Props<S>> {
     state: S = state
-    update = (fn: Set) => this.setState(prev => fn(prev), () => void (state = this.state))
+    update = (fn: Set<S>) => this.setState((prev: S) => fn(prev), () => void (state = this.state))
     shouldComponentUpdate = (_: Props<S>, nextState: S) => {
       const selector = this.props.selector ? this.props.selector : (s: S) => s
       return !equal(selector(this.state), selector(nextState))
@@ -22,10 +22,13 @@ function create<S>(initialState: S) {
       if (!renderFn) return <Box>{selector}</Box>
       return <Box selector={selector}>{(currentState: S) => renderFn(selector(currentState))}</Box>
     },
-    set: (fn: Set): void =>
+    set: (next: Set<S> | Partial<S>): void => {
       updaters.length
-        ? updaters.forEach((item: Updater) => item(fn))
-        : (state = Object.assign({}, state, fn(state))),
+        ? updaters.forEach((update: Updater<S>) =>
+            update(typeof next === 'function' ? next : () => next),
+          )
+        : (state = Object.assign({}, state, typeof next === 'function' ? next(state) : next))
+    },
     getState: (): S => state,
   }
 }
