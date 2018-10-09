@@ -21,20 +21,20 @@ function create<S>(init: S) {
   return {
     get<P>(selector: (state: S) => P, renderFn?: RenderFn<P>) {
       if (!renderFn) return <Box>{selector}</Box>
-      return <Box selector={selector}>{(currentState: S) => renderFn(selector(currentState))}</Box>
+      return <Box selector={selector}>{(current: S) => renderFn(selector(current))}</Box>
     },
-    set: (next: Set<S> | Partial<S>): Promise<S> => {
-      return new Promise(resolve => {
+    set: (next: Set<S> | Partial<S>): Promise<S> =>
+      new Promise(resolve => {
         if (!updaters.length) {
           state = Object.assign({}, state, typeof next === 'function' ? next(state) : next)
           return resolve(state)
         }
         updaters.forEach((update, i) => {
-          if (i + 1 !== updaters.length) return
-          update(typeof next === 'function' ? next : () => next, s => resolve(s))
+          update(typeof next === 'function' ? next : () => next, s => {
+            if (updaters.length === i + 1) resolve(s)
+          })
         })
-      })
-    },
+      }),
     getState: (): S => state,
   }
 }
