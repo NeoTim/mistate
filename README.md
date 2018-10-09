@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/mistate.svg)](https://www.npmjs.com/package/mistate) ![gzip size](https://img.shields.io/badge/gzip%20size-910%20B-44cc11.svg) [![Build Status](https://travis-ci.org/forsigner/mistate.svg?branch=master)](https://travis-ci.org/forsigner/mistate) [![Coverage Status](https://coveralls.io/repos/github/forsigner/mistate/badge.svg?branch=master)](https://coveralls.io/github/forsigner/mistate?branch=master)
 [![npm](https://img.shields.io/badge/TypeScript-%E2%9C%93-007ACC.svg)](https://www.typescriptlang.org/) [![GitHub license](https://img.shields.io/github/license/forsigner/mistate.svg)](https://github.com/forsigner/mistate/blob/master/LICENSE)
 
-> The minimal React state management library in the world
+> The smallest state management library for React
 
 Less than 1kb after gzip, 40 lines code only, one Api only.
 
@@ -79,8 +79,25 @@ const { get, set } = create({ text: 'foo' })
 
 Update state use `set()` in it, you can call it in anywhere, in React lifecycle fn、stateless componet... even out of React component, so you don't need HOC.
 
+**Set with object**
+
 ```js
 set({ text: 'bar' })
+```
+
+**Set with function**
+
+```js
+set(s => ({ text: s.text + 'bar' }))
+```
+
+**Return a Promise**
+
+```js
+async function setText() {
+  const newState = await set({ text: 'bar' })
+  // { text: 'bar' }
+}
 ```
 
 ### `getState()`

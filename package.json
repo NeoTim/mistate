@@ -36,7 +36,6 @@
     "{src,__tests__}/*.{js,ts,tsx}": [
       "npm run format",
       "npm run lint:fix",
-      "npm test",
       "git add"
     ]
   },

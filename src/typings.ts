@@ -5,5 +5,7 @@ export interface Props<S> {
   selector?: (state: S) => any
 }
 export type Set<S> = (state: S) => any
-export type Updater<S> = (fn: Set<S>) => void
+export type Updater<S> = (fn: Set<S>, cb: CB<S>) => void
 export type RenderFn<P> = (partialState: P) => React.ReactNode
+
+export type CB<S> = (next: S) => void
