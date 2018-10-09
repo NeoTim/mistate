@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/forsigner/mistate/compare/v1.1.0...v1.2.0) (2018-10-09)
+
+
+### Features
+
+* set return a Promise ([9d71bfb](https://github.com/forsigner/mistate/commit/9d71bfb))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/forsigner/mistate/compare/v1.0.0...v1.1.0) (2018-10-08)
 
