@@ -3,8 +3,8 @@ import { create } from 'mistate'
 const { get, set, getState } = create({ count: 1, name: 'Counter' })
 
 const actions = {
-  increment() {
-    set({ count: 100 })
+  async increment() {
+    await set(s => ({ count: s.count + 1 }))
   },
   decrement() {
     set(s => ({ count: s.count - 1 }))

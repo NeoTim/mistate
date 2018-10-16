@@ -8,8 +8,7 @@ function create<S>(init: S) {
   const updaters: Array<Updater<S>> = []
   const Box = class extends React.Component<Props<S>> {
     state: S = state
-    update = (fn: Set<S>, cb: CB<S>) =>
-      this.setState((prev: S) => fn(prev), () => void ((state = this.state), cb(state)))
+    update = (fn: Set<S>, cb: CB<S>) => this.setState((prev: S) => fn(prev), () => cb(this.state))
     shouldComponentUpdate = (_: Props<S>, nextState: S) => {
       const selector = this.props.selector ? this.props.selector : (s: S) => s
       return !equal(selector(this.state), selector(nextState))
@@ -31,7 +30,7 @@ function create<S>(init: S) {
         }
         updaters.forEach((update, i) => {
           update(typeof next === 'function' ? next : () => next, s => {
-            if (updaters.length === i + 1) resolve(s)
+            if (updaters.length === i + 1) resolve((state = s))
           })
         })
       }),
