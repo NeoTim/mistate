@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.2"></a>
+## [1.2.2](https://github.com/forsigner/mistate/compare/v1.2.1...v1.2.2) (2019-02-19)
+
+
+### Bug Fixes
+
+* fix update store ([e29eac4](https://github.com/forsigner/mistate/commit/e29eac4))
+* state update bug fixed ([624c33e](https://github.com/forsigner/mistate/commit/624c33e))
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/forsigner/mistate/compare/v1.2.0...v1.2.1) (2018-10-09)
 
